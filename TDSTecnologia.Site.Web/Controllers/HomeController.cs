@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using TDSTecnologia.Site.Core.Utilitarios;
 using TDSTecnologia.Site.Core.Entities;
 using TDSTecnologia.Site.Infrastructure.Data;
 
@@ -42,17 +43,17 @@ namespace TDSTecnologia.Site.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Novo([Bind("Id,Nome,Descricao,QuantidadeAula,DataInicio")] Curso curso, IFormFile arquivo)
+        public async Task<IActionResult> Novo([Bind("Id,Nome,Descricao,QuantidadeAula,DataInicio,Turno")] Curso curso, IFormFile arquivo)
         {
-            if (arquivo != null && arquivo.ContentType.ToLower().StartsWith("image/"))
-            {
-                MemoryStream ms = new MemoryStream();
-                await arquivo.OpenReadStream().CopyToAsync(ms);
-                curso.Banner = ms.ToArray();
-            }
-
             if (ModelState.IsValid)
             {
+                /*if (arquivo != null && arquivo.ContentType.ToLower().StartsWith("image/"))
+                {
+                    MemoryStream ms = new MemoryStream();
+                    await arquivo.OpenReadStream().CopyToAsync(ms);
+                    curso.Banner = ms.ToArray();
+                }*/
+                UtilImagem.ConverterParaByte(curso, arquivo);
                 _context.Add(curso);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -94,7 +95,7 @@ namespace TDSTecnologia.Site.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Alterar(int id, [Bind("Id,Nome,Descricao,QuantidadeAula,DataInicio")] Curso curso)
+        public async Task<IActionResult> Alterar(int id, [Bind("Id,Nome,Descricao,QuantidadeAula,DataInicio,Turno")] Curso curso)
         {
             if (id != curso.Id)
             {
@@ -103,7 +104,9 @@ namespace TDSTecnologia.Site.Web.Controllers
 
             if (ModelState.IsValid)
             {
+                
                 _context.Update(curso);
+                _context.Entry<Curso>(curso).Property(c => c.Banner).IsModified = false;
                 await _context.SaveChangesAsync();
 
 

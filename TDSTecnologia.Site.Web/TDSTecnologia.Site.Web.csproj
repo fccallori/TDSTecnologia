@@ -16,4 +16,8 @@
     <ProjectReference Include="..\TDSTecnologia.Site.Infrastructure\TDSTecnologia.Site.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\imagens\" />
+  </ItemGroup>
+
 </Project>

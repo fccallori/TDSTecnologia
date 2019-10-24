@@ -13,7 +13,7 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 fixed-top">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                    TDS Tecnologia
+                    <img src="~/imagens/logo-tds.png" width="60" height="30" alt="" />TDS Tecnologia
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -32,6 +32,15 @@
             </div>
         </nav>
     </header>
+    <div class="jumbotron" style="background-image: url('/imagens/banner.jpg');">
+        <h1 class="display-4">O que você gostaria de aprender?</h1>
+        <p class="lead text-primary">Vendemos o conhecimento, independente da tecnologia.</p>
+        <hr class="my-4">
+        <p class="text-info">Veja aqui nossos proximos cursos agendados, se preferir acesso nosso Calendário completo.</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-sm" href="#" role="button">Veja mais</a>
+        </p>
+    </div>
     <div>
         <main role="main" class="pb-3">
             @RenderBody()
