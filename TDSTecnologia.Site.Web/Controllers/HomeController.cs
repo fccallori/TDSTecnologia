@@ -20,6 +20,7 @@ namespace TDSTecnologia.Site.Web.Controllers
         {
             _context = context;
         }
+
         public async Task<IActionResult> Index()
         {
             List<Curso> cursos = await _context.CursoDao.ToListAsync();
@@ -43,7 +44,7 @@ namespace TDSTecnologia.Site.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Novo([Bind("Id,Nome,Descricao,QuantidadeAula,DataInicio,Turno")] Curso curso, IFormFile arquivo)
+        public async Task<IActionResult> Novo([Bind("Id,Nome,Descricao,QuantidadeAula,DataInicio,Turno,Modalidade,QuantidadeVagas,Nivel")] Curso curso, IFormFile arquivo)
         {
             if (ModelState.IsValid)
             {
@@ -95,7 +96,7 @@ namespace TDSTecnologia.Site.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Alterar(int id, [Bind("Id,Nome,Descricao,QuantidadeAula,DataInicio,Turno")] Curso curso)
+        public async Task<IActionResult> Alterar(int id, [Bind("Id,Nome,Descricao,QuantidadeAula,DataInicio,Turno,Modalidade,QuantidadeVagas,Nivel")] Curso curso)
         {
             if (id != curso.Id)
             {
@@ -104,7 +105,6 @@ namespace TDSTecnologia.Site.Web.Controllers
 
             if (ModelState.IsValid)
             {
-                
                 _context.Update(curso);
                 _context.Entry<Curso>(curso).Property(c => c.Banner).IsModified = false;
                 await _context.SaveChangesAsync();
