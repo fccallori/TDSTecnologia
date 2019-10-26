@@ -16,7 +16,7 @@ namespace TDSTecnologia.Site.Core.Utilitarios
             if (arquivo != null && arquivo.ContentType.ToLower().StartsWith("image/"))
             {
                 MemoryStream ms = new MemoryStream();
-                arquivo.OpenReadStream().CopyToAsync(ms);
+                arquivo.OpenReadStream().CopyTo(ms);
                return ms.ToArray();
             }
             return null;
