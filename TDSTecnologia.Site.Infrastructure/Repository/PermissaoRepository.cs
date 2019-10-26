@@ -39,7 +39,12 @@ namespace TDSTecnologia.Site.Infrastructure.Repository
 
         public void Excluir(Permissao permissao)
         {
-            _roleManager.DeleteAsync(permissao);
+            _context.Remove(permissao);
+        }
+
+        public void Atualizar(Permissao permissao)
+        {
+            _context.Update(permissao);
         }
     }
 }

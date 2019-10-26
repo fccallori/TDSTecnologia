@@ -39,6 +39,14 @@
       "files": [
         "popper.min.js"
       ]
+    },
+    {
+      "library": "Swiper@4.5.1",
+      "destination": "wwwroot/lib/Swiper/",
+      "files": [
+        "js/swiper.min.js",
+        "css/swiper.min.css"
+      ]
     }
   ]
 }

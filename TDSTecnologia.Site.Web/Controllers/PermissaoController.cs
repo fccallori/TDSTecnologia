@@ -53,5 +53,38 @@ namespace TDSTecnologia.Site.Web.Controllers
             _permissaoService.Excluir(id);
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult Alterar(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var permissao = _permissaoService.PesquisarPorId(id);
+            if (permissao == null)
+            {
+                return NotFound();
+            }
+            return View(permissao);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Alterar(string id, [Bind("Descricao,Id,Name,NormalizedName,ConcurrencyStamp")] Permissao permissao)
+        {
+            if (id != permissao.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                _permissaoService.Atualizar(permissao);
+                return RedirectToAction("Index", "Permissao");
+
+            }
+            return View(permissao);
+        }
     }
 }

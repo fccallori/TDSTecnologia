@@ -32,6 +32,7 @@
                             @Html.DisplayFor(modelItem => item.Descricao)
                         </td>
                         <td>
+                            <a asp-action="Alterar" asp-route-id="@item.Id" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Atualizar Permissão"><i class="far fa-edit"></i></a> &nbsp;
                             <a class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Excluir Permissão" onclick="ConfirmarExclusao('@item.Id', '@item.Name', '@controller')"><i class="fas fa-trash-alt"></i></a>
                         </td>
                     </tr>

@@ -45,5 +45,11 @@ namespace TDSTecnologia.Site.Infrastructure.Services
             _permissaoRepository.Excluir(PesquisarPorId(id));
             SaveChangesApp();
         }
+
+        public void Atualizar(Permissao permissao)
+        {
+            _permissaoRepository.Atualizar(permissao);
+            SaveChangesApp();
+        }
     }
 }
