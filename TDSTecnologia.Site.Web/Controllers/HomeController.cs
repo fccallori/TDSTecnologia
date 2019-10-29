@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using TDSTecnologia.Site.Core.Utilitarios;
 using TDSTecnologia.Site.Core.Entities;
 using TDSTecnologia.Site.Infrastructure.Services;
+using System;
+using TDSTecnologia.Site.Web.ViewModels;
+using X.PagedList;
 
 namespace TDSTecnologia.Site.Web.Controllers
 {
@@ -16,10 +19,17 @@ namespace TDSTecnologia.Site.Web.Controllers
             _cursoService = cursoService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int? pagina)
         {
-            List<Curso> cursos = _cursoService.ListarTodos();
-            return View(cursos);
+            // List<Curso> cursos = _cursoService.ListarTodos();
+
+            IPagedList<Curso> cursos = _cursoService.ListarComPaginacao(pagina);
+            var viewModel = new CursoViewModel
+            {
+                CursosComPaginacao = cursos
+            };
+
+            return View(viewModel);
         }
 
         [HttpGet]
@@ -112,6 +122,23 @@ namespace TDSTecnologia.Site.Web.Controllers
         {
             _cursoService.Excluir(id);
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult PesquisarCurso(CursoViewModel pesquisa)
+        {
+            if (pesquisa.Texto != null && !String.IsNullOrEmpty(pesquisa.Texto))
+            {
+                List<Curso> cursos = _cursoService.PesquisarPorNomeDescricao(pesquisa.Texto);
+                var viewModel = new CursoViewModel
+                {
+                    Cursos = cursos
+                };
+                return View("Index", viewModel);
+            }
+            else
+            {
+                return RedirectToAction(nameof(Index));
+            }
         }
     }
 }
