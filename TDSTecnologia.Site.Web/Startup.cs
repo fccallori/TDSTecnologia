@@ -35,6 +35,7 @@ namespace TDSTecnologia.Site.Web
             services.AddScoped<CursoRespository, CursoRespository>();
             services.AddScoped<CursoService, CursoService>();
             services.AddScoped<PermissaoService, PermissaoService>();
+            services.AddScoped<UsuarioService, UsuarioService>();
             services.AddIdentity<Usuario, Permissao>()
                             .AddDefaultUI(UIFramework.Bootstrap4)
                             .AddEntityFrameworkStores<AppContexto>();
