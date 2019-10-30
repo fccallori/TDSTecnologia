@@ -21,7 +21,7 @@ namespace TDSTecnologia.Site.Web.Controllers
         {
             var viewModel = new ContatoViewModel();
 
-            return View(viewModel);
+            return View("Contato",viewModel);
         }
 
         [HttpGet]
