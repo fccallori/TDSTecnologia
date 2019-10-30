@@ -32,11 +32,12 @@ namespace TDSTecnologia.Site.Web
         {
             services.AddMvc();
             services.AddEntityFrameworkNpgsql()
-           // .AddDbContext<AppContexto>(options => options.UseNpgsql(Databases.Instance.Conexao)));
-            .AddDbContext<AppContexto>(options => options.UseNpgsql(Configuration.GetConnectionString("AppConnection")));
+            .AddDbContext<AppContexto>(options => options.UseNpgsql(Databases.Instance.Conexao));
+           // .AddDbContext<AppContexto>(options => options.UseNpgsql(Configuration.GetConnectionString("AppConnection")));
             services.AddScoped<CursoRespository, CursoRespository>();
             services.AddScoped<CursoService, CursoService>();
             services.AddScoped<PermissaoService, PermissaoService>();
+            services.AddScoped<UsuarioService, UsuarioService>();
             services.AddIdentity<Usuario, Permissao>()
                             .AddDefaultUI(UIFramework.Bootstrap4)
                             .AddEntityFrameworkStores<AppContexto>();
