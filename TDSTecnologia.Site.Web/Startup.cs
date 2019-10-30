@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
@@ -43,7 +38,7 @@ namespace TDSTecnologia.Site.Web
                             .AddEntityFrameworkStores<AppContexto>();
 
             services.Configure<ConfiguracoesEmail>(Configuration.GetSection("ConfiguracoesEmail"));
-            services.AddScoped<IEmail, Email>();
+            services.AddScoped<Email, Email>();
         }
     
 
